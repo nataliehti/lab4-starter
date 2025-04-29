@@ -6,15 +6,14 @@
  * @returns The sum of the two numbers if add is true and false otherwise.
  */
 function sumValues(num1, num2, add) {
-    if (add) {
-        const result = 0;
-
+    if (add && Number.isInteger(num1) && Number.isInteger(num2)) { //making sure num1 and num2 are valid
+        let result = 0; //changed const to let bc result is changed
         result = num1 + num2;
 
         return result;
     }
     else {
-        return !add;
+        return false; //!add when add=false would become true
     }
 }
 
@@ -27,10 +26,16 @@ function sumValues(num1, num2, add) {
 function discountPrices(prices, discount) {
     const discounted = []
     const length = prices.length;
+
+    if(length == 0){ //checking that prices array isn't empty
+        return false;
+    }
     let discountedPrice = 0
     for(let i = 0; i < length; i++) {
-        discountedPrice += prices[i] * (1 - discount);
-        discounted.push(discountedPrice);
+        if(!Number.isInteger(prices[i])){ //checking if arg is invalid
+            return false;
+        }
+        discounted.push(prices[i] * (1 - discount)); //removed discountedPrice var, pushes int directly
     }
 
     return discounted;
